@@ -1,0 +1,187 @@
+
+global:
+  imageRegistry: ""
+  imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+kubeVersion: ""
+clusterDomain: cluster.local
+extraDeploy: []
+commonLabels: {}
+commonAnnotations: {}
+image:
+  registry: docker.io
+  repository: bitnami/nginx
+  tag: 1.21.6-debian-10-r93
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+  debug: false
+hostAliases: []
+command: []
+args: []
+extraEnvVars: []
+extraEnvVarsCM: ""
+extraEnvVarsSecret: ""
+replicaCount: 1
+updateStrategy:
+  type: RollingUpdate
+  rollingUpdate: {}
+podLabels: {}
+podAnnotations: {}
+podAffinityPreset: ""
+podAntiAffinityPreset: soft
+nodeAffinityPreset:
+  type: ""
+  key: ""
+  values: []
+affinity: {}
+hostNetwork: false
+hostIPC: false
+nodeSelector: {}
+tolerations: {}
+priorityClassName: ""
+podSecurityContext:
+  enabled: false
+  fsGroup: 1001
+  sysctls: []
+containerSecurityContext:
+  enabled: false
+  runAsUser: 1001
+  runAsNonRoot: true
+containerPorts:
+  http: 8080
+  https: ""
+resources:
+  limits: {}
+  requests: {}
+lifecycleHooks: {}
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 30
+  timeoutSeconds: 5
+  periodSeconds: 10
+  failureThreshold: 6
+  successThreshold: 1
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 5
+  timeoutSeconds: 3
+  periodSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+customLivenessProbe: {}
+customReadinessProbe: {}
+autoscaling:
+  enabled: false
+  minReplicas: ""
+  maxReplicas: ""
+  targetCPU: ""
+  targetMemory: ""
+extraVolumes: []
+extraVolumeMounts: []
+serviceAccount:
+  create: false
+  name: ""
+  annotations: {}
+  autoMount: false
+sidecars: []
+sidecarSingleProcessNamespace: false
+initContainers: []
+pdb:
+  create: false
+  minAvailable: 1
+  maxUnavailable: 0
+cloneStaticSiteFromGit:
+  enabled: false
+  image:
+    registry: docker.io
+    repository: bitnami/git
+    tag: 2.36.0-debian-10-r10
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+  repository: ""
+  branch: ""
+  interval: 60
+  gitClone:
+    command: []
+    args: []
+  gitSync:
+    command: []
+    args: []
+  extraEnvVars: []
+  extraVolumeMounts: []
+serverBlock: ""
+existingServerBlockConfigmap: ""
+staticSiteConfigmap: ""
+staticSitePVC: ""
+service:
+  type: LoadBalancer
+  port: 80
+  httpsPort: 443
+  nodePorts:
+    http: ""
+    https: ""
+  targetPort:
+    http: http
+    https: https 
+  loadBalancerIP: ""
+  annotations: {}
+  externalTrafficPolicy: Cluster
+ingress:
+  enabled: false
+  pathType: ImplementationSpecific
+  apiVersion: ""
+  hostname: nginx.local
+  path: /
+  annotations: {}
+  ingressClassName: ""
+  tls: false
+  extraHosts: []
+  extraPaths: []
+  extraTls: []
+  secrets: []
+healthIngress:
+  enabled: false
+  pathType: ImplementationSpecific
+  hostname: example.local
+  annotations: {}
+  tls: false
+  extraHosts: []
+  extraTls: []
+  secrets: []
+metrics:
+  enabled: false
+  port: ""
+  image:
+    registry: docker.io
+    repository: bitnami/nginx-exporter
+    tag: 0.10.0-debian-10-r125
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+  podAnnotations: {}
+  securityContext:
+    enabled: false
+    runAsUser: 1001
+  service:
+    port: 9113
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "{{ .Values.metrics.service.port }}"
+  resources:
+    limits: {}
+    requests: {}
+  serviceMonitor:
+    enabled: false
+    namespace: ""
+    interval: ""
+    scrapeTimeout: ""
+    selector: {}
+    additionalLabels: {}    
+    relabelings: []
+    metricRelabelings: []
+  prometheusRule:
+    enabled: false
+    namespace: ""
+    additionalLabels: {}
+    rules: []
+
